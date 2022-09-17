@@ -21,3 +21,30 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+bin/
+Libs/
+.settings
+.classpath
+/Reports/
+/Screenshots/
+debug.log
+settings*
+console.properties
+appium.log
+test-output/
+target/
+session.chls
+/TNG_Reports/
+/logs/
+mvn
+/tmp/
+extent.html
+
+# Eclipse Core
+.project
+.classpath
+
+# Mac files
+.DS_Store
+/target/
