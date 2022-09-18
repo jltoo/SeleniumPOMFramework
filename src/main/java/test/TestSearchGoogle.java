@@ -1,23 +1,19 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import pages.HomePage;
-import utilities.DriverInstance;
 
 public class TestSearchGoogle extends BaseTest {
 	HomePage homePage;
 	String tcName = "Reg_TC_001_Verify_User_Can_Search";
-
+	
+	
 	@Test(priority= 1)
 	public void openHomePage() {
 		setUpTest(tcName, "This is a Sample Test");
-		openUrl("https://www.google.com");	
+		openUrl(url);
 	}
 	
 	@Test(priority= 2)
@@ -26,7 +22,7 @@ public class TestSearchGoogle extends BaseTest {
 		homePage.searchFromGoogle("test");
 	}
 	
-	@Test(priority= 3)
+	@AfterClass
 	public void endTest() {
 		closeBrowser();
 		

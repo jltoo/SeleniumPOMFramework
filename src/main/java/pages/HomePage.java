@@ -36,7 +36,7 @@ public class HomePage extends utilities.BaseHelper{
 	@FindBy(xpath="//input[@name='q']")
 	public WebElement googleSearchInptField;
 	
-	@FindBy(xpath="(//input[@name='btnK'])[2]")
+	@FindBy(xpath="(//input[@name='btnK'])[1]")
 	public WebElement googleSearchBtn;
 	
 	public HomePage(WebDriver driver) {

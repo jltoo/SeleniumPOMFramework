@@ -37,7 +37,7 @@ public class BaseHelper extends DriverInstance{
 	public static ExtentTest test;
 	public static String tcName;
 	static DriverInstance obj;
-	
+	public static String propertyFilePath;
 	
 	
 	public void setUpTest(String tcName, String description) {
@@ -54,7 +54,6 @@ public class BaseHelper extends DriverInstance{
 	}
 	
 	public void closeBrowser() {
-		
 		driver.quit();
 	}
 	
@@ -63,12 +62,20 @@ public class BaseHelper extends DriverInstance{
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy-HH_mm_ss_SSS");
 	    Date date = new Date();
 	    String name = sdf.format(date);
-        
 	    String extentReport = path + "/TNG_Reports/" + "TestRunReport-" + name + ".html";
 	    
         extent = Reports.createInstance(extentReport);
-        
     }
+	
+	public static String getEnviPath() {
+		String envi = System.getProperty("envi");
+		if(envi==null) {
+			envi = "test";
+		} 
+		System.out.println("Environment - "+envi);
+		return propertyFilePath= "envi/"+ envi +".properties";
+		
+	}
 
 	public void click(WebElement locator) {
 		try {
