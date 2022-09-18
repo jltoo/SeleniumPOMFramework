@@ -46,7 +46,7 @@ public class BaseTest extends BaseHelper {
 		logBuilder.info("Total  TestCases : " + testCount);
 		logBuilder.info("Total  Execution Time : " + hours + " hours : " + minutes + " minutes : " + seconds + " seconds");
 		logBuilder.info("*********************************************************");
-		logBuilder.info("closing Browser");
+		logBuilder.info("Test Completed");
 		logBuilder.endTestCase();
 		extent.flush();
 	}
