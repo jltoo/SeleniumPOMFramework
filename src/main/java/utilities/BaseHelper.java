@@ -21,12 +21,16 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
+import org.testng.log4testng.Logger;
 import org.xml.sax.SAXException;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.model.Log.LogBuilder;
+
+
+import pages.BasePage;
+
 import com.aventstack.extentreports.MediaEntityBuilder;
 //import utilities.DriverInstance;
 
@@ -38,6 +42,8 @@ public class BaseHelper extends DriverInstance{
 	public static String tcName;
 	static DriverInstance obj;
 	public static String propertyFilePath;
+//	static Logger log = Logger.getLogger(BasePage.class);
+	LogBuilder logBuilder = new LogBuilder();
 	
 	
 	public void setUpTest(String tcName, String description) {
@@ -247,5 +253,20 @@ public class BaseHelper extends DriverInstance{
 		
 	}
 	
+	
+	 public void verifyIsElementDisplayed(WebElement locator) {
+	        try {
+	        	WebElement element = locator;
+	            element.isDisplayed();
+	            test.log(Status.PASS, "PASS Verified " +locator + " : Element is found successfully.");
+	            // test.createNode("Element is displayed");
+	            logBuilder.info("PASS Verified " + locator + " : Element is found successfully.");
+	        } catch (Exception e) {
+	            logBuilder.info(e.getMessage());
+	            test.log(Status.FAIL, "FAIL Verified "+ locator + " : Element is not found.");
+	            logBuilder.info("FAIL Verified " + locator + " : Element was not found.");
+	            addScreenshotToReport();
+	        }
+	    }
 	
 }

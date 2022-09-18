@@ -17,7 +17,7 @@ public class BaseTest extends BaseHelper {
 		initializeReport();
 		enviPath = getEnviPath();
 		configFileReader = new ConfigFileReader(enviPath);
-		url = configFileReader.getApplicationUrl(); 
+		url = configFileReader.getApplicationUrl();
 	}
 	
 	@AfterSuite

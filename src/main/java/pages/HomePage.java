@@ -9,12 +9,7 @@ import com.aventstack.extentreports.ExtentTest;
 
 import utilities.DriverInstance;
 
-public class HomePage extends utilities.BaseHelper{
-	WebDriver driver;
-	WebElement element;
-	public static ExtentTest test;
-	
-	
+public class HomePage extends BasePage{
 	@FindBy(xpath="//div[@class='home-header__account']//a[contains(.,'Log in')]")
 	public WebElement loginLinkNav;
 	
@@ -38,6 +33,9 @@ public class HomePage extends utilities.BaseHelper{
 	
 	@FindBy(xpath="(//input[@name='btnK'])[1]")
 	public WebElement googleSearchBtn;
+	
+	@FindBy(xpath="//h3[text()='Speedtest by Ookla - The Global Broadband Speed Test']")
+	public WebElement ooklaLink;
 	
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -68,5 +66,9 @@ public class HomePage extends utilities.BaseHelper{
 	public void searchFromGoogle(String text) {
 		sendText(googleSearchInptField, text);
 		click(googleSearchBtn);
+	}
+	
+	public void verifyText() {
+		verifyIsElementDisplayed(ooklaLink);
 	}
 }

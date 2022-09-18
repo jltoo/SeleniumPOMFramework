@@ -20,6 +20,7 @@ public class TestSearchGoogle extends BaseTest {
 	public void testGoogleSearch() {
 		homePage = new HomePage(driver);
 		homePage.searchFromGoogle("test");
+		homePage.verifyText();
 	}
 	
 	@AfterClass
