@@ -19,7 +19,6 @@ public class DriverInstance {
 	public boolean staleElement = true; 
 	
 	private static WebDriver webDriver;
-//	private static WebDriver driver;
 
     public static WebDriver getWebDriver() {
         return webDriver;
@@ -33,26 +32,6 @@ public class DriverInstance {
         return webDriver;
     }
 
-//	public void initializeDriver(String browser) {
-//		extent = new ExtentReports();
-//		spark = new ExtentSparkReporter("target/Spark/Spark.html");
-//		extent.attachReporter(spark);
-//		
-//		if (browser.equalsIgnoreCase("chrome")) {
-//			WebDriverManager.chromedriver().setup();
-//			ChromeOptions options = new ChromeOptions();
-////			options.addArguments("window-size=1920x1080");
-//			options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-//			options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-//    		options.addArguments("--incognito");
-//    		options.addArguments("--whitelisted-ips");
-//    		options.addArguments("--disable-popup-blocking");
-//			setWebDriver(new ChromeDriver(options));
-//		}
-//		getWebDriver().manage().window().maximize();		
-//
-//	}
-	
 	
 	public WebDriver initializeDriver(String browser) {
 		WebDriver driver = null;

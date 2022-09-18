@@ -43,7 +43,7 @@ public class BaseHelper extends DriverInstance{
 	static DriverInstance obj;
 	public static String propertyFilePath;
 //	static Logger log = Logger.getLogger(BasePage.class);
-	LogBuilder logBuilder = new LogBuilder();
+	public LogBuilder logBuilder = new LogBuilder();
 	
 	
 	public void setUpTest(String tcName, String description) {
@@ -262,7 +262,7 @@ public class BaseHelper extends DriverInstance{
 	            // test.createNode("Element is displayed");
 	            logBuilder.info("PASS Verified " + locator + " : Element is found successfully.");
 	        } catch (Exception e) {
-	            logBuilder.info(e.getMessage());
+//	            logBuilder.info(e.getMessage());
 	            test.log(Status.FAIL, "FAIL Verified "+ locator + " : Element is not found.");
 	            logBuilder.info("FAIL Verified " + locator + " : Element was not found.");
 	            addScreenshotToReport();
