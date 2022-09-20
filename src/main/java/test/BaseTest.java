@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -18,7 +19,7 @@ public class BaseTest extends BaseHelper {
 	
 	@BeforeSuite
 	public void initializeTestExecution() {
-		
+		startingTime = System.currentTimeMillis();
 		initializeReport();
 		enviPath = getEnviPath();
 		configFileReader = new ConfigFileReader(enviPath);
@@ -28,12 +29,23 @@ public class BaseTest extends BaseHelper {
 	@BeforeClass
 	public void setupTest(){
 		testCount = testCount + 1;
+		isFailed = false;
 	}
+	
+	@AfterClass
+	public void endTest() {
+		closeBrowser();
+		
+		if (isFailed == true ) {
+			failedTestCount = 1; 
+		}
+		
+	}
+	
 	
 	@AfterSuite
 	public void endTestExecution() {
         long endTime = System.currentTimeMillis();
-        System.out.println("execution time in millis = "+endTime);
         long runTime = endTime - startingTime;
         int hours = (int) ((runTime / (1000*60*60)) % 24);
         int minutes = (int) ((runTime / (1000 * 60)) % 60);

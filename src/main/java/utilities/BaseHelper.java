@@ -47,6 +47,7 @@ public class BaseHelper extends DriverInstance{
 	public static String propertyFilePath;
 //	static Logger log = Logger.getLogger(BasePage.class);
 	public LogBuilder logBuilder = new LogBuilder();
+	public static boolean isFailed = false;
 	
 	
 	
@@ -58,6 +59,7 @@ public class BaseHelper extends DriverInstance{
 
 	public void openUrl(String url) {
 		obj = new DriverInstance();
+		
 		driver = obj.initializeDriver("chrome");
 		
 		driver.get(url);
@@ -263,9 +265,13 @@ public class BaseHelper extends DriverInstance{
 //	            logBuilder.info(e.getMessage());
 	            test.log(Status.FAIL, "FAIL Verified "+ locator + " : Element is not found.");
 	            logBuilder.info("FAIL Verified " + locator + " : Element was not found.");
-	            Assert.fail("TEST");
-	            addScreenshotToReport();
+	            softAssertFailed("Element not found");
 	        }
 	    }
 	
+	 public void softAssertFailed(String message) {
+		 isFailed = true;
+		 Assert.fail(message);
+         addScreenshotToReport();
+	 }
 }

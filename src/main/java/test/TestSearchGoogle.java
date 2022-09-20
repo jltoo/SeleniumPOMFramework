@@ -23,11 +23,6 @@ public class TestSearchGoogle extends BaseTest {
 		homePage.verifyText();
 	}
 	
-	@AfterClass
-	public void endTest() {
-		closeBrowser();
-		
-	}
 	
 	
 }

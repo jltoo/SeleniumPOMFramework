@@ -1,6 +1,5 @@
 package test;
 
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import pages.HomePage;
@@ -20,12 +19,6 @@ public class TestSearchGoogle2 extends BaseTest {
 		homePage = new HomePage(driver);
 		homePage.searchFromGoogle("sample");
 		homePage.verifyText();
-	}
-	
-	@AfterClass
-	public void endTest() {
-		closeBrowser();
-		
 	}
 	
 	
