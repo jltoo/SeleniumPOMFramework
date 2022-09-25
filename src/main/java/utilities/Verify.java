@@ -20,7 +20,7 @@ public class Verify extends BaseHelper{
 	public void verifyUrl(String val) {
 		String URL = driver.getCurrentUrl();
 		if (URL.equals(val)) {
-			assertPass("Pass Verified URL Matched - Expected URL is "  + val + ": Actual Text is "+ URL);
+			assertPass("PASS Verified URL Matched - Expected URL is "  + val + ": Actual Text is "+ URL);
 		} else {
 			softAssertFail( "FAIL Verified - URL not matched - Expected URL is " + val + "Actual Url is " + URL);
 		}

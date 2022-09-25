@@ -9,16 +9,12 @@ public class TestSearchGoogle2 extends BaseTest {
 	HomePage homePage;
 	String tcName = "Reg_TC_002_Verify_User_Can_Search";
 	
+
 	@Test(priority= 1)
-	public void openHomePage() {
-	
-		setUpTest(tcName, "Test 2");
-		openUrl(url);
-	}
-	@Test(priority= 2)
 	@Parameters("b")
 	public void testGoogleSearch(String text) {
-		
+		setUpTest(tcName, "Test 2");
+		openUrl(url);
 		if (text==null) {
 			text = "test";
 		}

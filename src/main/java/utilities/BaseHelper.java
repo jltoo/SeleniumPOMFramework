@@ -192,7 +192,7 @@ public class BaseHelper extends DriverInstance{
 			assertPass("PASS Verified - Successfully Scrolled to Element - " + locator);
 		} catch (Exception e) {
 			waitTime(time);
-			hardAssertFail("Fail Verified - Unable to Scroll to Element - " + locator);
+			hardAssertFail("FAIL Verified - Unable to Scroll to Element - " + locator);
 		}
 	}
 
