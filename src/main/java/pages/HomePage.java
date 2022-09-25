@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.aventstack.extentreports.ExtentTest;
 
 import utilities.DriverInstance;
+import utilities.Enums;
 
 public class HomePage extends BasePage{
 	@FindBy(xpath="//div[@class='home-header__account']//a[contains(.,'Log in')]")
@@ -33,6 +34,9 @@ public class HomePage extends BasePage{
 	
 	@FindBy(xpath="(//input[@name='btnK'])[1]")
 	public WebElement googleSearchBtn;
+
+	@FindBy(xpath="//*[text()='Filipino']")
+	public WebElement filipinoLinkTxt;
 	
 	@FindBy(xpath="//h3[text()='Speedtest by Ookla - The Global Broadband Speed Test']")
 	public WebElement ooklaLink;
@@ -65,6 +69,8 @@ public class HomePage extends BasePage{
 	
 	public void searchFromGoogle(String text) {
 		sendText(googleSearchInptField, text);
+		waitTime(2);
+		verify.verifyElementText(googleSearchBtn, Enums.HomePage.filipinoLinkTxt.label);
 		click(googleSearchBtn);
 	}
 	

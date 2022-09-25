@@ -2,9 +2,10 @@ package utilities;
 
 import org.openqa.selenium.WebElement;
 import com.aventstack.extentreports.Status;
+import org.testng.asserts.SoftAssert;
 
 public class Verify extends BaseHelper{
-
+	SoftAssert sa = new SoftAssert();
 	
 
 	public void verifyIsElementDisplayed(WebElement locator) {
@@ -35,7 +36,7 @@ public class Verify extends BaseHelper{
    			 assertPass("PASS Verified Text matched - Expected Text is " + text + ": Actual Text is "+ actualText);
                 
        	 } else {
-       		softAssertFail("FAIL Verified Expected Text is " + text + ": Actual Text is "+ actualText);          
+       		softAssertFail("FAIL Verified Expected Text is " + text + ": Actual Text is "+ actualText);
        	 }
    		 
    	 } catch(Exception e) {

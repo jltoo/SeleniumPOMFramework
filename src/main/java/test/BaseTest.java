@@ -6,11 +6,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import org.testng.asserts.SoftAssert;
 import propertyfilereader.ConfigFileReader;
 import utilities.BaseHelper;
 
 @Listeners (listener.TestNGListener.class)
 public class BaseTest extends BaseHelper {
+	SoftAssert sa = new SoftAssert();
 	public static String url;
 	ConfigFileReader configFileReader;
 	private static String enviPath;
@@ -37,11 +39,9 @@ public class BaseTest extends BaseHelper {
 	@AfterClass
 	public void endTest() {
 		closeBrowser();
-		
 		if (isFailed == true ) {
-			failedTestCount = 1; 
+			failedTestCount = failedTestCount + 1;
 		}
-		
 	}
 	
 	

@@ -278,11 +278,14 @@ public class BaseHelper extends DriverInstance{
 		File src=ts.getScreenshotAs(OutputType.FILE);
 
 		SimpleDateFormat sdf = new SimpleDateFormat(Constants.DOMAIN_SDF24h);
+		SimpleDateFormat sdf1 = new SimpleDateFormat(Constants.DOMAIN_SDF);
+
 		Date date = new Date();
 		String name = sdf.format(date);
+		String folderName = sdf1.format(date);
 
-		File destination = new File("TNG_Reports/"+tcName+"/"+name+".png");
-		File ssdestination = new File (tcName+"/"+name+".png");
+		File destination = new File("TNG_Reports/"+folderName+"/"+tcName+"/"+name+".png");
+		File ssdestination = new File (folderName+"/"+tcName+"/"+name+".png");
 		String ssFilepath = ssdestination.getPath();
 		try {
 			FileUtils.copyFile(src, destination);	
@@ -316,6 +319,14 @@ public class BaseHelper extends DriverInstance{
 		test.log(Status.FAIL, message);
 		logBuilder.warn(message);
 		sa.fail(message);
+		try {
+			sa.assertAll();
+		} catch (AssertionError e) {
+////			throw new AssertionError(e.getMessage());
+//			logBuilder.error(e.getMessage());
+
+
+		}
 		addScreenshotToReport();
 	}
 

@@ -22,8 +22,8 @@ public class TestSearchGoogle2 extends BaseTest {
 		homePage = new HomePage(driver);
 		homePage.searchFromGoogle(text);
 		homePage.verifyText();
-		homePage.clickOoklaLink();
-		homePage.verifyOoklaUrl();
+//		homePage.clickOoklaLink();
+//		homePage.verifyOoklaUrl();
 	}
 	
 	
