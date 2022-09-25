@@ -1,11 +1,8 @@
 package utilities;
 
-import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,24 +15,18 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
-import org.testng.log4testng.Logger;
+import org.testng.asserts.SoftAssert;
 import org.xml.sax.SAXException;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-
-
-import pages.BasePage;
-
 import com.aventstack.extentreports.MediaEntityBuilder;
 //import utilities.DriverInstance;
+import com.aventstack.extentreports.Status;
 
 public class BaseHelper extends DriverInstance{
 	protected static WebDriver driver;
@@ -44,41 +35,109 @@ public class BaseHelper extends DriverInstance{
 	public static ExtentTest test;
 	public static String tcName;
 	static DriverInstance obj;
-	public static String propertyFilePath;
-//	static Logger log = Logger.getLogger(BasePage.class);
+	public static String propertyFilePath;;
 	public LogBuilder logBuilder = new LogBuilder();
+	SoftAssert sa = new SoftAssert();
 	public static boolean isFailed = false;
-	
-	
-	
+
+
+
 	public void setUpTest(String tcName, String description) {
-//		initializeReport();
-		this.tcName = tcName;
+		BaseHelper.tcName = tcName;
 		test = extent.createTest(tcName,description);
 	}
 
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword openUrl
+	 * @usage for initializing webdriver and redirecting to url
+	 * @param url
+	 * @return NA
+	 * @example openUrl("<url>")
+	 */
+
+
 	public void openUrl(String url) {
 		obj = new DriverInstance();
-		
+
 		driver = obj.initializeDriver("chrome");
-		
-		driver.get(url);
+
+		redirectToUrl(url);
 	}
-	
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword redirectToUrl
+	 * @usage redirecting to url
+	 * @param url
+	 * @return NA
+	 * @example redirectToUrl("<url>")
+	 */
+
+	public void redirectToUrl(String url) {
+		driver.get(url);
+		test.log(Status.INFO, "Redirecting to url - " + url);
+		logBuilder.info("Redirecting to url - " + url);
+	}
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword closeBrowser
+	 * @usage For Closing browser instance
+	 * @param NA
+	 * @return NA
+	 * @example closeBrowser()
+	 */
+
 	public void closeBrowser() {
 		driver.quit();
+		test.log(Status.INFO, "Test Case Execution Completed - Closing Browser ");
+		logBuilder.info("Test Case Execution Completed - Closing Browser");
 	}
-	
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword initializeReport
+	 * @usage For initializing Extent Report- Only called once in BaseTest
+	 * @param NA
+	 * @return NA
+	 * @example initializeReport()
+	 */
+
 	public static void initializeReport(){
-    	String path = System.getProperty("user.dir");
-	    SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy-HH_mm_ss_SSS");
-	    Date date = new Date();
-	    String name = sdf.format(date);
-	    String extentReport = path + "/TNG_Reports/" + "TestRunReport-" + name + ".html";
-	    
-        extent = Reports.createInstance(extentReport);
-    }
-	
+		String path = System.getProperty("user.dir");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy-HH_mm_ss_SSS");
+		Date date = new Date();
+		String name = sdf.format(date);
+		String extentReport = path + "/TNG_Reports/" + "TestRunReport-" + name + ".html";
+
+		extent = Reports.createInstance(extentReport);
+	}
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword getEnviPath
+	 * @usage For getting envi path used for envi configs (Envi params can be passed by executing -Denvi in maven command
+	 * @param NA
+	 * @return NA
+	 * @example getEnviPath()
+	 */
+
 	public static String getEnviPath() {
 		String envi = System.getProperty("envi");
 		if(envi==null) {
@@ -86,19 +145,55 @@ public class BaseHelper extends DriverInstance{
 		} 
 		System.out.println("Environment - "+envi);
 		return propertyFilePath= "envi/"+ envi +".properties";
-		
+
 	}
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword click
+	 * @usage click element
+	 * @param NA
+	 * @return NA
+	 * @example click(<LOCATOR>)
+	 */
 
 	public void click(WebElement locator) {
 		try {
 			locator.click();
-			test.log(Status.PASS, locator + " : Click is done successfully.");
+			assertPass("PASS Verified - Successfully Clicked Element - " + locator);
 		} catch (Exception e) {
 			e.printStackTrace();
-			test.log(Status.FAIL, locator + " : Click is not done.");
-			// throw new AssertionError("Unable to click an element in a page", e);
+			hardAssertFail("FAIL Verified -  Unable to Click Element - " + locator);
 		}
-		addScreenshotToReport();
+
+	}
+
+	/**
+	 * @author Lovie Too
+	 * @createdDate NA
+	 * @modifiedBy NA
+	 * @modifiedDate NA
+	 * @keyword click
+	 * @usage scroll to element to view
+	 * @param NA
+	 * @return NA
+	 * @example scrollToElement(<LOCATOR>, waitTime)
+	 */
+
+	public void scrollToElement(WebElement locator,int time) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);",locator);
+			js.executeScript("window.scrollBy(0,-100)", "");
+			waitTime(time);
+			assertPass("PASS Verified - Successfully Scrolled to Element - " + locator);
+		} catch (Exception e) {
+			waitTime(time);
+			hardAssertFail("Fail Verified - Unable to Scroll to Element - " + locator);
+		}
 	}
 
 	public void mouseHoverToElement(WebElement locator, int timeout) {
@@ -107,90 +202,46 @@ public class BaseHelper extends DriverInstance{
 			Actions builder = new Actions(driver);
 			builder.moveToElement(hoverElement).perform();
 			waitTime(timeout);
+			assertPass("PASS Verified - Successfully Hovered To Element - " + locator);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			//test.log(Status.FAIL, loc + " : Element not found");
+			hardAssertFail("FAIL Verified - Unable to Mouse Hover to Element - " + locator);
 		}
 
 	}
-	
+
 	public void sendText(WebElement locator, String data) {
-		   try {
-			   WebElement element = locator;
-			   //element.click();
-			   element.sendKeys(data);
-			   test.log(Status.PASS, "Typed the value " + data);
-		   } catch (Exception e) {
-			   e.printStackTrace();
-//			   test.log(Status.FAIL, loc + " : Unable to put text to field");
-		   }
-		   
-		   addScreenshotToReport();
-	   }
+		try {
+			WebElement element = locator;
+			element.sendKeys(data);
+			assertPass("PASS Verified - Successfully inputted " + data + " To Element -" + locator);
+		} catch (Exception e) {
+			e.printStackTrace();
+			softAssertFail("Unable to type to Element - " + locator);
+		}
+	}
 
 	public void waitTime(int seconds) {
 		try {
-            int ms = 1000 * seconds;
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-	}
-
-	public void waitUntilElementClickable(WebElement locator, Integer timeout) {
-		try {
-			System.out.println("WAIT UNTIL ELEMENT CLICKABLE");
-			WebDriverWait wait = new WebDriverWait(driver, timeout);
-			wait.until(ExpectedConditions.elementToBeClickable(locator));
-			ExpectedCondition<Boolean> condition = new ExpectedCondition<Boolean>() {
-
-				public Boolean apply(WebDriver driver) {
-					return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
-							.equals("complete");
-				}
-			};
-
-			wait.until(condition);
-		} catch (Exception e) {
+			int ms = 1000 * seconds;
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
-			//    		test.log(Status.INFO, locator + " : Element is still not visible.");
-
 		}
 	}
-	
-	public void waitUntilElementVisible(WebElement locator, Integer timeout) {
-		try {
-			System.out.println("WAIT UNTIL ELEMENT VISIBLE");
-			By byLocator = toByVal(locator);
-			WebDriverWait wait = new WebDriverWait(driver, timeout);
-			wait.until(ExpectedConditions.presenceOfElementLocated(byLocator));
-			ExpectedCondition<Boolean> condition = new ExpectedCondition<Boolean>() {
 
-				public Boolean apply(WebDriver driver) {
-					return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
-							.equals("complete");
-				}
-			};
 
-			wait.until(condition);
-		} catch (Exception e) {
-//			e.printStackTrace();
-			//    		test.log(Status.INFO, locator + " : Element is still not visible.");
-
-		}
-	}
-	
 	public By toByVal(WebElement we) {
-	    // By format = "[foundFrom] -> locator: term"
-	    // see RemoteWebElement toString() implementation
-	    String[] data = we.toString().split(" -> ")[1].replace("]", "").split(": ");
-	    String locator = data[0];
-	    String locValue = data[1];
-	    
-	    System.out.println("WebElement value - " + we);
-	    By by=null;
-	    
+		// By format = "[foundFrom] -> locator: term"
+		// see RemoteWebElement toString() implementation
+		String[] data = we.toString().split(" -> ")[1].replace("]", "").split(": ");
+		String locator = data[0];
+		String locValue = data[1];
+
+		System.out.println("WebElement value - " + we);
+		By by=null;
+
 		if(locator.equalsIgnoreCase("id"))
 		{
 			by = By.id(locValue);
@@ -217,10 +268,10 @@ public class BaseHelper extends DriverInstance{
 			by = By.partialLinkText(locValue);
 		}
 		return by;
-	    
+
 	}
-	
-	
+
+
 	public static String getScreenshot(WebDriver driver) throws ParserConfigurationException, SAXException, IOException{
 
 		TakesScreenshot ts=(TakesScreenshot) driver;
@@ -229,7 +280,7 @@ public class BaseHelper extends DriverInstance{
 		SimpleDateFormat sdf = new SimpleDateFormat(Constants.DOMAIN_SDF24h);
 		Date date = new Date();
 		String name = sdf.format(date);
-		
+
 		File destination = new File("TNG_Reports/"+tcName+"/"+name+".png");
 		File ssdestination = new File (tcName+"/"+name+".png");
 		String ssFilepath = ssdestination.getPath();
@@ -241,7 +292,7 @@ public class BaseHelper extends DriverInstance{
 		}
 		return ssFilepath;
 	}
-	
+
 	public void addScreenshotToReport(){
 		try {
 			test.log(Status.INFO,"Screen Capture", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot(driver)).build());
@@ -250,28 +301,28 @@ public class BaseHelper extends DriverInstance{
 			e.printStackTrace();
 			System.out.println("CANNOT TAKE SCREENSHOT");
 		}
-		
-		
 	}
-	
-	
-	 public void verifyIsElementDisplayed(WebElement locator) {
-	        try {
-	        	WebElement element = locator;
-	            element.isDisplayed();
-	            test.log(Status.PASS, "PASS Verified " +locator + " : Element is found successfully.");
-	            logBuilder.info("PASS Verified " + locator + " : Element is found successfully.");
-	        } catch (Exception e) {
-//	            logBuilder.info(e.getMessage());
-	            test.log(Status.FAIL, "FAIL Verified "+ locator + " : Element is not found.");
-	            logBuilder.info("FAIL Verified " + locator + " : Element was not found.");
-	            softAssertFailed("Element not found");
-	        }
-	    }
-	
-	 public void softAssertFailed(String message) {
-		 isFailed = true;
-		 Assert.fail(message);
-         addScreenshotToReport();
-	 }
+
+	public void hardAssertFail(String message) {
+		isFailed = true;
+		test.log(Status.FAIL, message);
+		logBuilder.info(message);
+		Assert.fail(message);
+		addScreenshotToReport();
+	}
+
+	public void softAssertFail(String message) {
+		isFailed = true;
+		test.log(Status.FAIL, message);
+		logBuilder.info(message);
+		sa.fail(message);
+		addScreenshotToReport();
+	}
+
+	public void assertPass(String message) {
+		test.log(Status.PASS, message);
+		logBuilder.info(message);
+		addScreenshotToReport();
+	}
+
 }

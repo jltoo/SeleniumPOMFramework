@@ -43,7 +43,7 @@ public class HomePage extends BasePage{
 	}
 	
 	public void clickClosePopupBtn() {
-		waitUntilElementClickable(closePopupBtn, 60);
+		wait.waitUntilElementClickable(closePopupBtn, 60);
 		click(closePopupBtn);
 	}
 	
@@ -53,7 +53,7 @@ public class HomePage extends BasePage{
 	}
 	
 	public void loginUser(String username, String password) {
-		waitUntilElementVisible(loginEmailFld, 10);
+		wait.waitUntilElementVisible(loginEmailFld, 10);
 		sendText(loginEmailFld, username);
 		sendText(loginPswrdFld, password);
 		
@@ -69,6 +69,15 @@ public class HomePage extends BasePage{
 	}
 	
 	public void verifyText() {
-		verifyIsElementDisplayed(ooklaLink);
+		verify.verifyIsElementDisplayed(ooklaLink);
+	}
+	
+	public void clickOoklaLink() {
+		scrollToElement(ooklaLink, 2);
+		click(ooklaLink);
+	}
+	
+	public void verifyOoklaUrl() {
+		verify.verifyUrl("https://www.speedtest.net/");
 	}
 }
