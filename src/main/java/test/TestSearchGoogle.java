@@ -1,10 +1,12 @@
 package test;
 
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.HomePage;
+
 
 public class TestSearchGoogle extends BaseTest {
 	HomePage homePage;
@@ -13,7 +15,7 @@ public class TestSearchGoogle extends BaseTest {
 	
 	@Test(priority= 1)
 	public void openHomePage() {
-		setUpTest(tcName, "This is a Sample Test");
+		setUpTest(tcName, "Test 1");
 		openUrl(url);
 	}
 	

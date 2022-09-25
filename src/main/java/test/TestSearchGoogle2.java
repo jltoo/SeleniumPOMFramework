@@ -12,7 +12,7 @@ public class TestSearchGoogle2 extends BaseTest {
 	@Test(priority= 1)
 	public void openHomePage() {
 	
-		setUpTest(tcName, "This is a Sample Test");
+		setUpTest(tcName, "Test 2");
 		openUrl(url);
 	}
 	@Test(priority= 2)

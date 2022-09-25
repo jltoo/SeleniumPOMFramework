@@ -306,7 +306,7 @@ public class BaseHelper extends DriverInstance{
 	public void hardAssertFail(String message) {
 		isFailed = true;
 		test.log(Status.FAIL, message);
-		logBuilder.info(message);
+		logBuilder.warn(message);
 		Assert.fail(message);
 		addScreenshotToReport();
 	}
@@ -314,7 +314,7 @@ public class BaseHelper extends DriverInstance{
 	public void softAssertFail(String message) {
 		isFailed = true;
 		test.log(Status.FAIL, message);
-		logBuilder.info(message);
+		logBuilder.warn(message);
 		sa.fail(message);
 		addScreenshotToReport();
 	}

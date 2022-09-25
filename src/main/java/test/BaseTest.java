@@ -4,10 +4,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import propertyfilereader.ConfigFileReader;
 import utilities.BaseHelper;
 
+@Listeners (listener.TestNGListener.class)
 public class BaseTest extends BaseHelper {
 	public static String url;
 	ConfigFileReader configFileReader;
