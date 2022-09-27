@@ -19,6 +19,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.IHookCallBack;
+import org.testng.IHookable;
+import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
 import org.xml.sax.SAXException;
 
@@ -28,7 +31,8 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 //import utilities.DriverInstance;
 import com.aventstack.extentreports.Status;
 
-public class BaseHelper extends DriverInstance{
+
+public class BaseHelper extends DriverInstance implements IHookable{
 	protected static WebDriver driver;
 	WebElement element;
 	public static ExtentReports extent;
@@ -37,10 +41,31 @@ public class BaseHelper extends DriverInstance{
 	static DriverInstance obj;
 	public static String propertyFilePath;;
 	public LogBuilder logBuilder = new LogBuilder();
-	SoftAssert sa = new SoftAssert();
+//	SoftAssert softAssert = new SoftAssert();
 	public static boolean isFailed = false;
 
 
+	private static SoftAssert softAssert = null;
+	
+	public void run(IHookCallBack callBack, ITestResult testResult) {
+		// TODO Auto-generated method stub
+		setSoftAssert();
+		
+		callBack.runTestMethod(testResult);
+		
+		setAssertAll();
+	}
+	
+	public static void setSoftAssert(){
+		SoftAssert softAssert = new SoftAssert();
+		
+	}
+	
+	public static void setAssertAll(){
+		SoftAssert softAssert = new SoftAssert();
+		softAssert.assertAll();
+
+	}
 
 	public void setUpTest(String tcName, String description) {
 		BaseHelper.tcName = tcName;
@@ -318,15 +343,9 @@ public class BaseHelper extends DriverInstance{
 		isFailed = true;
 		test.log(Status.FAIL, message);
 		logBuilder.warn(message);
-		sa.fail(message);
-		try {
-			sa.assertAll();
-		} catch (AssertionError e) {
-////			throw new AssertionError(e.getMessage());
-//			logBuilder.error(e.getMessage());
+		softAssert.fail(message);
+//		sa.assertAll();
 
-
-		}
 		addScreenshotToReport();
 	}
 
@@ -335,5 +354,8 @@ public class BaseHelper extends DriverInstance{
 		logBuilder.info(message);
 		addScreenshotToReport();
 	}
+
+
+
 
 }

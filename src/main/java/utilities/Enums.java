@@ -12,4 +12,9 @@ public class Enums {
             this.label = label;
         }
     }
+    
+    public enum TestPage {
+    	
+    	
+    }
 }

@@ -2,6 +2,7 @@ package test;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
@@ -35,6 +36,12 @@ public class BaseTest extends BaseHelper {
 		testCount = testCount + 1;
 		isFailed = false;
 	}
+	
+	@AfterTest
+	public void afterTest() {
+		sa.assertAll();
+	}
+	
 	
 	@AfterClass
 	public void endTest() {
