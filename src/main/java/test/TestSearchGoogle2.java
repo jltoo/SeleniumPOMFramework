@@ -8,14 +8,12 @@ import pages.HomePage;
 
 public class TestSearchGoogle2 extends BaseTest {
 	HomePage homePage;
-//	String tcName = "Reg_TC_002_Verify_User_Can_Search";
-	
+	String tcName;
 
 	@Test(priority= 1)
 	@Parameters("b")
 	public void TC_001_Verify_User_Can_Search_Text_To_Google(@Optional("test") String text) {
-//		setUpTest(tcName, "Test 2");
-		tcName = getTCName();
+		tcName = Thread.currentThread().getStackTrace()[1].getMethodName();
 		setUpTest(tcName, "Test 2");
 		openUrl(url);
 		
@@ -29,7 +27,7 @@ public class TestSearchGoogle2 extends BaseTest {
 	@Test(priority= 2)
 	@Parameters("a")
 	public void TC_002_Verify_User_Can_Search_Text_To_Google(@Optional("Test") String text) {
-		tcName = getTCName();
+		tcName = Thread.currentThread().getStackTrace()[1].getMethodName();
 		setUpTest(tcName, "Test 1");
 		openUrl(url);
 

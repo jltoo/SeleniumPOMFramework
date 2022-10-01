@@ -14,6 +14,5 @@
     <classes>
       <class name="test.TestSearchGoogle2"/>
     </classes>
-    
   </test> 
 </suite> <!-- Suite -->
