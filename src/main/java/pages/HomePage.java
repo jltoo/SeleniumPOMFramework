@@ -67,23 +67,27 @@ public class HomePage extends BasePage{
 		click(loginModalLoginBtn);
 	}
 	
-	public void searchFromGoogle(String text) {
+	public HomePage searchFromGoogle(String text) {
 		sendText(googleSearchInptField, text);
 		waitTime(2);
 		verify.verifyElementText(filipinoLinkTxt, Enums.HomePage.filipinoLinkTxt.label);
 		click(googleSearchBtn);
+		return this;
 	}
 	
-	public void verifyText() {
+	public HomePage verifyText() {
 		verify.verifyElementDisplayed(ooklaLink);
+		return this;
 	}
 	
-	public void clickOoklaLink() {
+	public HomePage clickOoklaLink() {
 		scrollToElement(ooklaLink, 2);
 		click(ooklaLink);
+		return this;
 	}
 	
-	public void verifyOoklaUrl() {
+	public HomePage verifyOoklaUrl() {
 		verify.verifyUrl("https://www.speedtest.net/");
+		return this;
 	}
 }

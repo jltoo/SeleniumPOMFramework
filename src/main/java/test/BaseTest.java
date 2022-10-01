@@ -34,7 +34,7 @@ public class BaseTest extends BaseHelper {
 
 	@AfterMethod
 	public void afterTest() {
-		sa.assertAll();
+//		sa.assertAll();
 		closeBrowser();
 		if (isFailed == true ) {
 			failedTestCount = failedTestCount + 1;

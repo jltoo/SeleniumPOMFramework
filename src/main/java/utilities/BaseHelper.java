@@ -13,10 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
@@ -29,6 +26,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 //import utilities.DriverInstance;
 import com.aventstack.extentreports.Status;
+import reports.LogBuilder;
+import reports.Reports;
 
 
 public class BaseHelper extends DriverInstance implements IHookable{

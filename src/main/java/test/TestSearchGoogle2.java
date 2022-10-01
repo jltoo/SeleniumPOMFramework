@@ -18,10 +18,10 @@ public class TestSearchGoogle2 extends BaseTest {
 		openUrl(url);
 		
 		homePage = new HomePage(driver);
-		homePage.searchFromGoogle(text);
-		homePage.verifyText();
-		homePage.clickOoklaLink();
-		homePage.verifyOoklaUrl();
+		homePage.searchFromGoogle(text)
+		.verifyText()
+		.clickOoklaLink()
+		.verifyOoklaUrl();
 	}
 
 	@Test(priority= 2)
@@ -32,10 +32,10 @@ public class TestSearchGoogle2 extends BaseTest {
 		openUrl(url);
 
 		homePage = new HomePage(driver);
-		homePage.searchFromGoogle(text);
-		homePage.verifyText();
-		homePage.clickOoklaLink();
-		homePage.verifyOoklaUrl();
+		homePage.searchFromGoogle(text)
+		.verifyText()
+		.clickOoklaLink()
+		.verifyOoklaUrl();
 	}
 	
 	

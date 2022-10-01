@@ -14,14 +14,11 @@ public class TestSearchGoogle extends BaseTest {
 	public void testGoogleSearch(@Optional("Test") String text) {
 		setUpTest(tcName, "Test 1");
 		openUrl(url);
-
 		homePage = new HomePage(driver);
-		homePage.searchFromGoogle(text);
-		homePage.verifyText();
-		homePage.clickOoklaLink();
-		homePage.verifyOoklaUrl();
+		homePage.searchFromGoogle(text)
+		.verifyText()
+		.clickOoklaLink()
+		.verifyOoklaUrl();
 	}
-	
-	
-	
+
 }
