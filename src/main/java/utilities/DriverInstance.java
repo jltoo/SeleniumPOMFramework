@@ -11,6 +11,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
+
+import java.io.IOException;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -19,8 +24,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverInstance {
 	public static By by;
-	public boolean staleElement = true; 
-	
+	public boolean staleElement = true;
+
 	private static WebDriver webDriver;
 
     public static WebDriver getWebDriver() {
@@ -35,7 +40,18 @@ public class DriverInstance {
         return webDriver;
     }
 
-	
+	private static ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<>();
+	TestUtils utils = new TestUtils();
+
+	public AppiumDriver getAppiumDriver(){
+		return appiumDriver.get();
+	}
+
+	public void setAppiumDriver(AppiumDriver driver2){
+		appiumDriver.set(driver2);
+	}
+
+
 	public WebDriver initializeDriver(String browser) {
 		WebDriver driver = null;
 		if (browser.equalsIgnoreCase("chrome")) {
@@ -45,7 +61,7 @@ public class DriverInstance {
     		options.addArguments("--incognito");
     		options.addArguments("--whitelisted-ips");
     		options.addArguments("--disable-popup-blocking");
-    		
+
 			driver = WebDriverManager.chromedriver().capabilities(options).create();
 		} else if (browser.equalsIgnoreCase("remote-chrome")) {
 			ChromeOptions options = new ChromeOptions();
@@ -54,47 +70,44 @@ public class DriverInstance {
     		options.addArguments("--incognito");
     		options.addArguments("--whitelisted-ips");
     		options.addArguments("--disable-popup-blocking");
-    		
+
 			driver = WebDriverManager.chromedriver().capabilities(options).remoteAddress("http://Localhost:4444")
 					.create();
 		}  else if (browser.equalsIgnoreCase("firefox")) {
-    		
+
     		FirefoxOptions options = new FirefoxOptions();
     		options.addArguments("add_experimental_option(\"excludeSwitches\",[\"ignore-certificate-errors\"])");
     		options.addArguments("--verbose");
-    		options.addArguments("--incognito");   
+    		options.addArguments("--incognito");
     		options.addArguments("--whitelisted-ips");
     		options.addArguments("--disable-popup-blocking");
     		options.setAcceptInsecureCerts(true);
 
 
-    		
+
 			driver = WebDriverManager.chromedriver().capabilities(options).create();
 		} else if (browser.equalsIgnoreCase("remote-firefox")) {
-    		
+
     		FirefoxOptions options = new FirefoxOptions();
     		options.addArguments("add_experimental_option(\"excludeSwitches\",[\"ignore-certificate-errors\"])");
     		options.addArguments("--verbose");
-    		options.addArguments("--incognito");   
+    		options.addArguments("--incognito");
     		options.addArguments("--whitelisted-ips");
     		options.addArguments("--disable-popup-blocking");
     		options.setAcceptInsecureCerts(true);
 
 
-    		
+
 			driver = WebDriverManager.chromedriver().capabilities(options).remoteAddress("http://Localhost:4444")
 					.create();
 		}
-		
-		driver.manage().window().maximize();		
-		
+
+		driver.manage().window().maximize();
+
 		return driver;
 	}
-	
-	
-	
-	
-	
+
+
 	
 	
 }

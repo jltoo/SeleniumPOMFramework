@@ -70,12 +70,12 @@ public class HomePage extends BasePage{
 	public void searchFromGoogle(String text) {
 		sendText(googleSearchInptField, text);
 		waitTime(2);
-		verify.verifyElementText(googleSearchBtn, Enums.HomePage.filipinoLinkTxt.label);
+		verify.verifyElementText(filipinoLinkTxt, Enums.HomePage.filipinoLinkTxt.label);
 		click(googleSearchBtn);
 	}
 	
 	public void verifyText() {
-		verify.verifyIsElementDisplayed(ooklaLink);
+		verify.verifyElementDisplayed(ooklaLink);
 	}
 	
 	public void clickOoklaLink() {

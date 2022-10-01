@@ -1,9 +1,6 @@
 package test;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import pages.HomePage;
 
@@ -14,21 +11,15 @@ public class TestSearchGoogle extends BaseTest {
 
 	@Test(priority= 1)
 	@Parameters("a")
-	public void testGoogleSearch(String text) {
+	public void testGoogleSearch(@Optional("Test") String text) {
 		setUpTest(tcName, "Test 1");
 		openUrl(url);
-		
-		if (text==null) {
-			text = "test";
-		}
-		
+
 		homePage = new HomePage(driver);
 		homePage.searchFromGoogle(text);
 		homePage.verifyText();
-//		homePage.clickOoklaLink();
-//		homePage.verifyOoklaUrl();
-
-		sa.assertAll();
+		homePage.clickOoklaLink();
+		homePage.verifyOoklaUrl();
 	}
 	
 	

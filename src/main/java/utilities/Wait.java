@@ -54,7 +54,7 @@ public class Wait extends BaseHelper {
 		logBuilder.info("Waiting for Element to be Invisible.");
 		try {
 			By byLocator = toByVal(locator);
-			WebDriverWait wait = new WebDriverWait(DriverInstance.getWebDriver(), timeout);
+			WebDriverWait wait = new WebDriverWait(driver, timeout);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(byLocator));
 			ExpectedCondition<Boolean> condition = new ExpectedCondition<Boolean>() {
 				public Boolean apply(WebDriver driver) {
@@ -75,7 +75,7 @@ public class Wait extends BaseHelper {
 		By byLocator = toByVal(locator);
 		try {
 			for (int x = 0; x < 5; x++) {
-				WebDriverWait wait = new WebDriverWait(DriverInstance.getWebDriver(), timeout);
+				WebDriverWait wait = new WebDriverWait(driver, timeout);
 				wait.until(ExpectedConditions.elementToBeClickable(byLocator));
 				ExpectedCondition<Boolean> condition = new ExpectedCondition<Boolean>() {
 					public Boolean apply(WebDriver driver) {

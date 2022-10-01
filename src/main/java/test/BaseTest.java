@@ -1,11 +1,6 @@
 package test;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 import org.testng.asserts.SoftAssert;
 import propertyfilereader.ConfigFileReader;
@@ -31,24 +26,25 @@ public class BaseTest extends BaseHelper {
 		url = configFileReader.getApplicationUrl();
 	}
 	
-	@BeforeClass
+	@BeforeMethod
 	public void setupTest(){
 		testCount = testCount + 1;
 		isFailed = false;
 	}
-	
-	@AfterTest
+
+	@AfterMethod
 	public void afterTest() {
 		sa.assertAll();
-	}
-	
-	
-	@AfterClass
-	public void endTest() {
 		closeBrowser();
 		if (isFailed == true ) {
 			failedTestCount = failedTestCount + 1;
 		}
+	}
+	
+	
+	@AfterClass
+	public void afterClass() {
+
 	}
 	
 	

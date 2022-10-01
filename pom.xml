@@ -18,7 +18,11 @@
 		<artifactId>testng</artifactId>
 		<version>6.8</version>
 	</dependency>
-	
+	<dependency>
+		<groupId>io.appium</groupId>
+		<artifactId>java-client</artifactId>
+		<version>7.6.0</version>
+	</dependency>
 	<dependency>
 		<groupId>com.aventstack</groupId>
 		<artifactId>extentreports</artifactId>
@@ -53,6 +57,14 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>7</source>
+					<target>7</target>
 				</configuration>
 			</plugin>
 		</plugins>
