@@ -1,0 +1,49 @@
+{
+	"flightType": "Round Trip",
+	"flightDomInt": "DOM/INT",
+	"flight": {
+		"MNL": "Manila",
+		"CEB": "Cebu"
+	},
+	"paxCount": {
+		"adt": 1,
+		"chd": 1,
+		"infWithSeat": 1,
+		"infOnLap": 1
+	},
+	"bundle": "Go Basic/Easy/Flexi/PerPax",
+	"guestDetails": [
+		{
+			"gender": "male/female",
+			"firstName": "testName",
+			"middleName": "testMiddleName",
+			"lastName": "testLastName",
+			"dateOfBirth": "March/30/1990",
+			"bundle": "GO Basic",
+			"Nationality": "Philippines",
+			"PassportNo": "123123",
+			"PassportExp": "March/30/2030",
+			"PassportLoc": "Manila"
+		},
+		{
+			"gender": "male/female",
+			"firstName": "testName",
+			"middleName": "testMiddleName",
+			"lastName": "testLastName",
+			"dateOfBirth": "March/30/1990",
+			"bundle": "GO Basic",
+			"Nationality": "Philippines",
+			"PassportNo": "123123",
+			"PassportExp": "March/30/2030",
+			"PassportLoc": "Manila"
+		}
+	],
+	"contactInformation": {
+		"firstName": "testName",
+		"middleName": "testMiddleName",
+		"lastName": "testLastName",
+		"emailAddress": "emailaddress@test.com",
+		"contactCountry": "Philippines",
+		"contactNo": "123123"
+	}
+}
