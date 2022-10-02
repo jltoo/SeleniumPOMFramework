@@ -193,6 +193,18 @@ public class BaseHelper extends DriverInstance implements IHookable{
 
 	}
 
+	public void click(By locator) {
+		try {
+			element = driver.findElement(locator);
+			element.click();
+			assertPass("PASS Verified - Successfully Clicked Element - " + locator);
+		} catch (Exception e) {
+			e.printStackTrace();
+			hardAssertFail("FAIL Verified -  Unable to Click Element - " + locator);
+		}
+
+	}
+
 	/**
 	 * @author Lovie Too
 	 * @createdDate NA
@@ -207,11 +219,28 @@ public class BaseHelper extends DriverInstance implements IHookable{
 	public void jsClick(WebElement locator) throws Exception {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			Actions actions = new Actions(DriverInstance.getWebDriver());
-			actions.moveToElement(element).click();
+			Actions actions = new Actions(driver);
+			actions.moveToElement(locator).click();
 			js.executeScript("arguments[0].click();", locator);
 
  			assertPass("PASS Verified - Successfully Clicked ELement - "+ locator);
+		} catch (Exception e) {
+			logBuilder.info(e.getMessage());
+			e.printStackTrace();
+			softAssertFail("FAIL - Verified - Unable to Click Element - " + locator);
+		}
+
+	}
+
+	public void jsClick(By locator) throws Exception {
+		try {
+			element = driver.findElement(locator);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			Actions actions = new Actions(driver);
+			actions.moveToElement(element).click();
+			js.executeScript("arguments[0].click();", locator);
+
+			assertPass("PASS Verified - Successfully Clicked ELement - "+ locator);
 		} catch (Exception e) {
 			logBuilder.info(e.getMessage());
 			e.printStackTrace();
@@ -236,6 +265,20 @@ public class BaseHelper extends DriverInstance implements IHookable{
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(true);",locator);
+			js.executeScript("window.scrollBy(0,-100)", "");
+			waitTime(time);
+			assertPass("PASS Verified - Successfully Scrolled to Element - " + locator);
+		} catch (Exception e) {
+			waitTime(time);
+			hardAssertFail("FAIL Verified - Unable to Scroll to Element - " + locator);
+		}
+	}
+
+	public void scrollToElement(By locator,int time) {
+		try {
+			element = driver.findElement(locator);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);",element);
 			js.executeScript("window.scrollBy(0,-100)", "");
 			waitTime(time);
 			assertPass("PASS Verified - Successfully Scrolled to Element - " + locator);
@@ -272,6 +315,21 @@ public class BaseHelper extends DriverInstance implements IHookable{
 
 	}
 
+	public void mouseHoverToElement(By locator, int timeout) {
+		try {
+			WebElement hoverElement = driver.findElement(locator);
+			Actions builder = new Actions(driver);
+			builder.moveToElement(hoverElement).perform();
+			waitTime(timeout);
+			assertPass("PASS Verified - Successfully Hovered To Element - " + locator);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			hardAssertFail("FAIL Verified - Unable to Mouse Hover to Element - " + locator);
+		}
+
+	}
+
 	/**
 	 * @author Lovie Too
 	 * @createdDate NA
@@ -286,6 +344,19 @@ public class BaseHelper extends DriverInstance implements IHookable{
 	public void selectByText(WebElement locator, String data) {
 		try {
 			WebElement element = locator;
+			Select dropdown = new Select(element);
+			dropdown.selectByVisibleText(data);
+		} catch (Exception e) {
+			// TODO: handle exception
+			logBuilder.info(e.getMessage());
+			e.printStackTrace();
+			softAssertFail("Unable to select " + data +" from Element - " +locator);
+		}
+	}
+
+	public void selectByText(By locator, String data) {
+		try {
+			WebElement element = driver.findElement(locator);
 			Select dropdown = new Select(element);
 			dropdown.selectByVisibleText(data);
 		} catch (Exception e) {
@@ -319,6 +390,17 @@ public class BaseHelper extends DriverInstance implements IHookable{
 		}
 	}
 
+	public void sendText(By locator, String data) {
+		try {
+			WebElement element = driver.findElement(locator);
+			element.sendKeys(data);
+			assertPass("PASS Verified - Successfully inputted " + data + " to Element -" + locator);
+		} catch (Exception e) {
+			e.printStackTrace();
+			softAssertFail("Unable to type to Element - " + locator);
+		}
+	}
+
 	/**
 	 * @author Lovie Too
 	 * @createdDate NA
@@ -332,12 +414,21 @@ public class BaseHelper extends DriverInstance implements IHookable{
 	 */
 	public void clearText(WebElement locator, String data) throws Exception {
 		 try {
-			 element.sendKeys(data);
+			 locator.sendKeys(data);
 		 } catch (Exception e) {
 
 		 }
 
-		// test.log(Status.PASS, "Typed the value " + data);
+	}
+
+	public void clearText(By locator, String data) throws Exception {
+		try {
+			element = element.findElement(locator);
+			element.sendKeys(data);
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	/**
@@ -356,7 +447,24 @@ public class BaseHelper extends DriverInstance implements IHookable{
 		element.sendKeys(key);
 	}
 
+	public void pressKeys(By locator, Keys key) throws Exception {
+		WebElement element = driver.findElement(locator);
+		element.sendKeys(key);
+	}
+
 	public void sendTextThenPressEnter(WebElement locator, String data, int time) throws Exception {
+		try {
+			clearText(locator, (Keys.chord(Keys.CONTROL, "a", Keys.DELETE)));
+			waitTime(time);
+			sendText(locator, data);
+			pressKeys(locator, Keys.ENTER);
+
+		} catch (Exception e) {
+			softAssertFail("Unable to send text and press enter");
+		}
+	}
+
+	public void sendTextThenPressEnter(By locator, String data, int time) throws Exception {
 		try {
 			clearText(locator, (Keys.chord(Keys.CONTROL, "a", Keys.DELETE)));
 			waitTime(time);
@@ -379,6 +487,18 @@ public class BaseHelper extends DriverInstance implements IHookable{
 		}
 	}
 
+	public void sendTextThenPressTab(By locator, String data, int time) throws Exception {
+		try {
+			clearText(locator, (Keys.chord(Keys.CONTROL, "a", Keys.DELETE)));
+			waitTime(time);
+			sendText(locator, data);
+			pressKeys(locator, Keys.TAB);
+		} catch (Exception e) {
+			softAssertFail("Unable to send text and press tab");
+		}
+	}
+
+
 	public void waitTime(int seconds) {
 		try {
 			int ms = 1000 * seconds;
@@ -391,6 +511,17 @@ public class BaseHelper extends DriverInstance implements IHookable{
 	public void uploadFile(WebElement locator, String path) {
 		try {
 			locator.sendKeys(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+			softAssertFail("Unable to upload file");
+		}
+
+	}
+
+	public void uploadFile(By locator, String path) {
+		try {
+			element = element.findElement(locator);
+			element.sendKeys(path);
 		} catch (Exception e) {
 			e.printStackTrace();
 			softAssertFail("Unable to upload file");
