@@ -1,10 +1,15 @@
 {
-    "flightType": "Round Trip",
-    "flightDomInt": "DOM",
-    "flight": {
+    "flightType": "Multi-City",
+    "flightDomInt": "DOM/INT",
+    "flight": [{
         "Origin": "MNL",
         "Destination": "CEB"
-    },
+    },{
+		"Origin": "MNL",
+        "Destination": "CEB"
+	}
+    
+    ],
     "paxCount": {
         "adt": 1,
         "chd": 1,

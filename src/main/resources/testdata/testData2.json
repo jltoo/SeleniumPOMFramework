@@ -1,9 +1,9 @@
 {
     "flightType": "Round Trip",
-    "flightDomInt": "DOM",
+    "flightDomInt": "DOM/INT",
     "flight": {
-        "Origin": "MNL",
-        "Destination": "CEB"
+        "MNL": "Manila",
+        "CEB": "Cebu"
     },
     "paxCount": {
         "adt": 1,
@@ -12,10 +12,10 @@
         "infOnLap": 0
     },
     "bundle": {
-        "isPerPaxBundleFlight1": false,
-        "flightBundle1": "GO Basic",
-        "isPerPaxBundleFlight2": true,
-        "FlightBundle2": [
+        "isPerPaxBundleDepFlight": false,
+        "departureFlightBundle": "GO Basic",
+        "isPerPaxBundleReturnFlight": true,
+        "returnFlightBundle": [
             "GO Basic",
             "GO Flexi"
         ]
@@ -51,5 +51,43 @@
         "emailAddress": "emailaddress@test.com",
         "contactCountry": "Philippines",
         "contactNo": "123123"
+    },
+     "Addons": {
+        "Baggage":
+        [
+        	{
+        		"isApplyOnbothFlightFlag":false,
+        	"bothFlight": {
+        	"32": 1,
+        	"20": 1
+        	},
+        		
+        		
+        		"departureFlight":{
+        			"32kg":1,
+        			"20kg":1
+        		},
+        		"returnFlight":{
+        			"32kg":1,
+        			"20kg":1
+        		}
+        	},
+        	{
+        		"isApplyOnbothFlightFlag":false,
+        		"departureFlight":{
+        			"32kg":1,
+        			"20kg":1
+        		},
+        		"returnFlight":{
+        			"32kg":1,
+        			"20kg":1
+        		}
+        	}
+        ],
+        "Meal": [
+        
+        ]
+        	
+        
     }
 }

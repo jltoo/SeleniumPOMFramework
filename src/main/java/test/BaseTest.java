@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import propertyfilereader.ConfigFileReader;
 import utilities.BaseHelper;
+import utilities.JsonReader;
 
 @Listeners (listener.TestNGListener.class)
 public class BaseTest extends BaseHelper {
@@ -15,6 +16,7 @@ public class BaseTest extends BaseHelper {
 	private static int testCount = 0;
 	private static int failedTestCount = 0;
 	private static long startingTime = 0;
+	JsonReader jsonReader = new JsonReader();
 	
 	
 	@BeforeSuite
@@ -24,6 +26,7 @@ public class BaseTest extends BaseHelper {
 		enviPath = getEnviPath();
 		configFileReader = new ConfigFileReader(enviPath);
 		url = configFileReader.getApplicationUrl();
+		jsonReader.readJson();
 	}
 	
 	@BeforeMethod
