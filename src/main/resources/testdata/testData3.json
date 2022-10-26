@@ -1,14 +1,19 @@
 {
     "flightType": "Multi-City",
     "flightDomInt": "DOM/INT",
-    "flight": [{
-        "Origin": "MNL",
-        "Destination": "CEB"
-    },{
-		"Origin": "MNL",
-        "Destination": "CEB"
-	}
-    
+    "flight": [
+        {
+            "Origin": "MNL",
+            "Destination": "CEB"
+        },
+        {
+            "Origin": "CEB",
+            "Destination": "BCD"
+        },
+        {
+            "Origin": "BCD",
+            "Destination": "MNL"
+        }
     ],
     "paxCount": {
         "adt": 1,
@@ -16,15 +21,19 @@
         "infWithSeat": 0,
         "infOnLap": 0
     },
-    "bundle": {
-        "isPerPaxBundleFlight1": false,
-        "flightBundle1": "GO Basic",
-        "isPerPaxBundleFlight2": true,
-        "FlightBundle2": [
-            "GO Basic",
-            "GO Flexi"
-        ]
-    },
+    "bundle": [
+        {
+            "isPerPaxBundleFlight": false,
+            "bundleType": "GO Basic"
+        },
+        {
+            "isPerPaxBundleFlight": true,
+            "bundleType": [
+                "GO Basic",
+                "GO Flexi"
+            ]
+        }
+    ],
     "guestDetails": [
         {
             "gender": "male/female",

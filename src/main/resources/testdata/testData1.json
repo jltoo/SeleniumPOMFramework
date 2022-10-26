@@ -6,20 +6,30 @@
         "Destination": "CEB"
     },
     "paxCount": {
-        "adt": 1,
-        "chd": 1,
+        "adt": "1",
+        "chd": "1",
         "infWithSeat": 0,
         "infOnLap": 0
     },
-    "bundle": {
-        "isPerPaxBundleFlight1": false,
-        "flightBundle1": "GO Basic",
-        "isPerPaxBundleFlight2": true,
-        "FlightBundle2": [
-            "GO Basic",
-            "GO Flexi"
-        ]
-    },
+    "bundle": [
+        {
+            "isPerPaxBundleFlight": false,
+            "bundleType": "GO Basic"
+        },
+        {
+            "isPerPaxBundleFlight": true,
+            "bundleList":[
+				{
+				"pax" : "Adult 1",
+				"bundleType":"GO Basic"
+				},
+				{
+				"pax" : "Adult 2",
+				"bundleType":"GO Flexi"
+				}
+			]
+        }
+    ],
     "guestDetails": [
         {
             "gender": "male/female",
@@ -30,7 +40,8 @@
             "Nationality": "Philippines",
             "PassportNo": "123123",
             "PassportExp": "March/30/2030",
-            "PassportLoc": "Manila"
+            "PassportLoc": "Manila",
+            "paxType":"adt"
         },
         {
             "gender": "male/female",
@@ -41,7 +52,8 @@
             "Nationality": "Philippines",
             "PassportNo": "123123",
             "PassportExp": "March/30/2030",
-            "PassportLoc": "Manila"
+            "PassportLoc": "Manila",
+            "paxType":"chd"
         }
     ],
     "contactInformation": {
