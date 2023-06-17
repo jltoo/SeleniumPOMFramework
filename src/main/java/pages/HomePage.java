@@ -72,7 +72,7 @@ public class HomePage extends BasePage{
 		sendTextThenPressEnter(googleSearchInptField,text,1);
 		waitTime(2);
 //		verify.verifyElementText(filipinoLinkTxt, Enums.HomePage.filipinoLinkTxt.label);
-		click(googleSearchBtn);
+//		click(googleSearchBtn);
 		return this;
 	}
 	
