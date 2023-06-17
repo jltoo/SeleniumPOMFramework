@@ -26,7 +26,7 @@ public class BaseTest extends BaseHelper {
 		enviPath = getEnviPath();
 		configFileReader = new ConfigFileReader(enviPath);
 		url = configFileReader.getApplicationUrl();
-		jsonReader.readJson();
+//		jsonReader.readJson();
 	}
 	
 	@BeforeMethod

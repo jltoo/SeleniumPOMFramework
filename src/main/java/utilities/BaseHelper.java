@@ -452,7 +452,7 @@ public class BaseHelper extends DriverInstance implements IHookable{
 		element.sendKeys(key);
 	}
 
-	public void sendTextThenPressEnter(WebElement locator, String data, int time) throws Exception {
+	public void sendTextThenPressEnter(WebElement locator, String data, int time) {
 		try {
 			clearText(locator, (Keys.chord(Keys.CONTROL, "a", Keys.DELETE)));
 			waitTime(time);

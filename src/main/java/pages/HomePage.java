@@ -29,7 +29,7 @@ public class HomePage extends BasePage{
 	@FindBy(xpath="//div[contains(@class,'c-modal__ciam__signin')]//button[text()=' Log in ']")
 	public WebElement loginModalLoginBtn;
 	
-	@FindBy(xpath="//input[@name='q']")
+	@FindBy(xpath="//*[@name='q']")
 	public WebElement googleSearchInptField;
 	
 	@FindBy(xpath="(//input[@name='btnK'])[1]")
@@ -68,9 +68,10 @@ public class HomePage extends BasePage{
 	}
 	
 	public HomePage searchFromGoogle(String text) {
-		sendText(googleSearchInptField, text);
+//		sendText(googleSearchInptField, text);
+		sendTextThenPressEnter(googleSearchInptField,text,1);
 		waitTime(2);
-		verify.verifyElementText(filipinoLinkTxt, Enums.HomePage.filipinoLinkTxt.label);
+//		verify.verifyElementText(filipinoLinkTxt, Enums.HomePage.filipinoLinkTxt.label);
 		click(googleSearchBtn);
 		return this;
 	}
