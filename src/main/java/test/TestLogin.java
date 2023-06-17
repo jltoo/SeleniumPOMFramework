@@ -12,7 +12,7 @@ public class TestLogin extends utilities.BaseHelper {
 	HomePage homePage;
 	String tcName = "Reg_TC_002_Verify_User_Can_Login";
 
-	@BeforeTest
+	@Test
 	public void openHomePage() {
 		setUpTest(tcName, "This is a Sample Test");
 		openUrl("https://www.cebupacificair.com");	
@@ -25,11 +25,5 @@ public class TestLogin extends utilities.BaseHelper {
 		homePage.loginUser("JohnLovie.Too@cebupacificair.com", "P@$$W0rd1_2019");
 	}
 	
-	
-	@AfterTest
-	public void endTest() {
-		closeBrowser();
-		
-	}
 	
 }

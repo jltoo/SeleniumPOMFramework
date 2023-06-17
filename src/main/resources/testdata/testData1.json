@@ -1,0 +1,67 @@
+{
+    "flightType": "Round Trip",
+    "flightDomInt": "DOM",
+    "flight": {
+        "Origin": "MNL",
+        "Destination": "CEB"
+    },
+    "paxCount": {
+        "adt": "1",
+        "chd": "1",
+        "infWithSeat": 0,
+        "infOnLap": 0
+    },
+    "bundle": [
+        {
+            "isPerPaxBundleFlight": false,
+            "bundleType": "GO Basic"
+        },
+        {
+            "isPerPaxBundleFlight": true,
+            "bundleList":[
+				{
+				"pax" : "Adult 1",
+				"bundleType":"GO Basic"
+				},
+				{
+				"pax" : "Adult 2",
+				"bundleType":"GO Flexi"
+				}
+			]
+        }
+    ],
+    "guestDetails": [
+        {
+            "gender": "male/female",
+            "firstName": "testName",
+            "middleName": "testMiddleName",
+            "lastName": "testLastName",
+            "dateOfBirth": "March/30/1990",
+            "Nationality": "Philippines",
+            "PassportNo": "123123",
+            "PassportExp": "March/30/2030",
+            "PassportLoc": "Manila",
+            "paxType":"adt"
+        },
+        {
+            "gender": "male/female",
+            "firstName": "testName",
+            "middleName": "testMiddleName",
+            "lastName": "testLastName",
+            "dateOfBirth": "March/30/1990",
+            "Nationality": "Philippines",
+            "PassportNo": "123123",
+            "PassportExp": "March/30/2030",
+            "PassportLoc": "Manila",
+            "paxType":"chd"
+        }
+    ],
+    "contactInformation": {
+        "firstName": "testName",
+        "middleName": "testMiddleName",
+        "lastName": "testLastName",
+        "emailAddress": "emailaddress@test.com",
+        "contactCountry": "Philippines",
+        "contactNo": "123123"
+    }
+}
